@@ -1,18 +1,36 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { detailsOrder } from '../actions/orderActions';
+import { deliverOrder, detailsOrder } from '../actions/orderActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import { ORDER_DELIVER_RESET } from '../constants/orderConstants';
 
 export default function OrderScreen(props) {
   const orderId = props.match.params.id;
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+
+  const orderDeliver = useSelector((state) => state.orderDeliver);
+  const {
+    loading: loadingDeliver,
+    error: errorDeliver,
+    success: successDeliver,
+  } = orderDeliver;
   const dispatch = useDispatch();
   useEffect(() => {
+    if (!order || successDeliver || (order && order._id !== orderId)) {
+      dispatch({ type: ORDER_DELIVER_RESET });
     dispatch(detailsOrder(orderId));
-  }, [dispatch, orderId]);
+
+  } }, [dispatch,  orderId, successDeliver, order]);
+
+  const deliverHandler = () => {
+    dispatch(deliverOrder(order._id));
+  };
+
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (
@@ -33,7 +51,13 @@ export default function OrderScreen(props) {
                   {order.shippingAddress.postalCode},
                   {order.shippingAddress.country}
                 </p>
-                
+                {order.isDelivered ? (
+                  <MessageBox variant="success">
+                    Delivered at {order.deliveredAt}
+                  </MessageBox>
+                ) : (
+                  <MessageBox variant="danger">Not Delivered</MessageBox>
+                )}
               </div>
             </li>
             <li>
@@ -109,6 +133,21 @@ export default function OrderScreen(props) {
                   </div>
                 </div>
               </li>
+              {userInfo.isAdmin && !order.isDelivered && (
+                <li>
+                  {loadingDeliver && <LoadingBox></LoadingBox>}
+                  {errorDeliver && (
+                    <MessageBox variant="danger">{errorDeliver}</MessageBox>
+                  )}
+                  <button
+                    type="button"
+                    className="primary block"
+                    onClick={deliverHandler}
+                  >
+                    Deliver Order
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
         </div>

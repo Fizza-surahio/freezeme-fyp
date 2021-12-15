@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -6,22 +7,23 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
 export default function ProductScreen(props) {
-    
-    const dispatch = useDispatch();
-    const productId = props.match.params.id;
-    const [qty, setQty] = useState(1);
-    const productDetails = useSelector((state) => state.productDetails);
-    const { loading, error, product } = productDetails;
+  const dispatch = useDispatch();
+  const productId = props.match.params.id;
+  const [qty, setQty] = useState(1);
+  const productDetails = useSelector((state) => state.productDetails);
+  const { loading, error, product } = productDetails;
+
+  useEffect(() => {
+    dispatch(detailsProduct(productId));
+  }, [dispatch, productId]);
+ 
+  const addToCartHandler = () => {
+    props.history.push(`/cart/${productId}?qty=${qty}`);
+  };
   
-    useEffect(() => {
-      dispatch(detailsProduct(productId));
-    }, [dispatch, productId]);
-    const addToCartHandler = () => {
-        props.history.push(`/cart/${productId}?qty=${qty}`);
-      };
-    return(
-    <div> 
-        {loading ? (
+  return (
+    <div>
+      {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
@@ -41,20 +43,18 @@ export default function ProductScreen(props) {
                 <li>
                   <h1>{product.name}</h1>
                 </li>
+               
                 <li>Price : ${product.price}</li>
                 <li>
                   Description:
                   <p>{product.description}</p>
-                </li>
-                <li>
-                    Dimension:
-                    <p>{product.dimension} </p>
                 </li>
               </ul>
             </div>
             <div className="col-1">
               <div className="card card-body">
                 <ul>
+                  
                   <li>
                     <div className="row">
                       <div>Price</div>
@@ -108,8 +108,8 @@ export default function ProductScreen(props) {
               </div>
             </div>
           </div>
-        </div>
 
+        </div>
       )}
     </div>
   );
