@@ -8,11 +8,14 @@ import productRouter from './routers/productRouter.js';
 import userRouter from './routers/userRouter.js';
 import orderRouter from './routers/orderRouter.js';
 import uploadRouter from './routers/uploadRouter.js';
-//import { Socket } from 'dgram';
+import { Socket } from 'dgram';
+import sendMail from './mailer.js';
 
 dotenv.config();
 
 const app = express();
+sendMail().then(res => console.log(res))
+.catch(e => console.log(e))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

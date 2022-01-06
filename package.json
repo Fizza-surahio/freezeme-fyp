@@ -1,34 +1,20 @@
 {
-  "dependencies": {
-    "axios": "^0.21.1",
-    "bcrypt": "^5.0.1",
-    "bcryptjs": "^2.4.3",
-    "cross-env": "^7.0.3",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "express-async-handler": "^1.1.4",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.11",
-    "multer": "^1.4.3",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-router-dom": "^5.2.0",
-    "socket.io": "^4.3.2"
-  },
   "name": "freezeme",
-  "type": "module",
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "version": "1.0.0",
-  "main": "index.js",
-  "devDependencies": {
-    "eslint": "^7.27.0",
-    "eslint-plugin-react": "^7.23.2",
-    "init": "^0.1.2",
-    "nodemon": "^2.0.7"
-  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": ".eslintrc.js",
   "scripts": {
-    "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fizza-surahio/freezeme-fyp.git"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fizza-surahio/freezeme-fyp/issues"
+  },
+  "homepage": "https://github.com/Fizza-surahio/freezeme-fyp#readme",
+  "keywords": []
 }

@@ -21,7 +21,7 @@ import OrderListScreen from './screens/OrderListScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
 import DashboardScreen from './screens/DashboardScreen';
-import MapScreen from './screens/MapScreen';
+
 import SupportScreen from './screens/SupportScreen';
 import ChatBox from './components/ChatBox';
 
@@ -111,7 +111,7 @@ function App() {
           <Route path="/order/:id" component={OrderScreen}></Route>
           <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
           <PrivateRoute path="/profile" component={ProfileScreen}></PrivateRoute>
-          <PrivateRoute path="/map" component={MapScreen}></PrivateRoute>
+          
           <AdminRoute path="/dashboard" component={DashboardScreen}></AdminRoute>
           <AdminRoute path="/productlist" component={ProductListScreen} ></AdminRoute>
           <AdminRoute path="/orderlist" component={OrderListScreen}></AdminRoute>
