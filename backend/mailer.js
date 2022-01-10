@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
-const sendMail = async (recipient, order_id) => {
+const sendMail = async (recipient, order_id, order_info) => {
+    console.log(order_info)
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 465,
@@ -14,10 +15,10 @@ const sendMail = async (recipient, order_id) => {
     let info = await transporter.sendMail({
         from: 'fayazsfizza@gmail.com', // sender address
         to: recipient, // list of receivers
-        subject: `Shipment for Order # ${order_id}`, // Subject line
-        text: `Dear Customer, your order # ${order_id} has been shipped. please receive it tomorrow `, // plain text body
-        html: "<b>Hello world?</b>", // html body
+        subject: `FreezeME Shipment #${order_id}`, // Subject line
+        html: `<b>Dear Customer, your order # ${order_id} has been shipped. Following are the details please receive it tomorrow</b>`, // html body
     });
+    return info
 };
 
 export default sendMail

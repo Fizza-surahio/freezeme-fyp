@@ -139,4 +139,22 @@ orderRouter.put(
   })
 );
 
+orderRouter.patch(
+    '/:id/update',
+    isAuth,
+    isAdmin,
+    expressAsyncHandler(async (req, res) => {
+        const order = await Order.findById(req.params.id);
+        if (order) {
+            const {isPaid, paidAt} = req.body
+            order.isPaid = isPaid;
+            order.paidAt = paidAt
+            const updatedOrder = await order.save();
+            res.send({ message: 'Order Delivered', order: updatedOrder });
+        } else {
+            res.status(404).send({ message: 'Order Not Found' });
+        }
+    })
+);
+
 export default orderRouter;

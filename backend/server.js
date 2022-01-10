@@ -8,14 +8,13 @@ import productRouter from './routers/productRouter.js';
 import userRouter from './routers/userRouter.js';
 import orderRouter from './routers/orderRouter.js';
 import uploadRouter from './routers/uploadRouter.js';
-import { Socket } from 'dgram';
-import sendMail from './mailer.js';
+import mailing from "./routers/mailing.js";
 
 dotenv.config();
 
 const app = express();
-sendMail().then(res => console.log(res))
-.catch(e => console.log(e))
+// sendMail().then(res => console.log(res))
+// .catch(e => console.log(e))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -24,7 +23,7 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/freezeme', {
   useUnifiedTopology: true,
   useCreateIndex: true,
 });
-
+app.use('/api/mail', mailing)
 app.use('/api/uploads', uploadRouter);
 app.use('/api/users', userRouter);
 app.use('/api/products',productRouter);

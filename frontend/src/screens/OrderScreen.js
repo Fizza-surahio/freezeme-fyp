@@ -5,6 +5,7 @@ import { deliverOrder, detailsOrder } from '../actions/orderActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { ORDER_DELIVER_RESET } from '../constants/orderConstants';
+import axios from "axios";
 
 export default function OrderScreen(props) {
   const orderId = props.match.params.id;
@@ -29,8 +30,37 @@ export default function OrderScreen(props) {
 
   const deliverHandler = () => {
     dispatch(deliverOrder(order._id));
+    sendMailToUser()
   };
+  const sendMailToUser = ()  => {
+    const {email, token} = userInfo
+    const {_id, orderItems, shippingPrice, taxPrice, totalPrice} = order
+    const {fullName} = order.shippingAddress
+    const order_info = {
+      Name: fullName,
+      Tax: taxPrice,
+      Shipping: shippingPrice,
+      Total: totalPrice,
+      Items: orderItems
+    }
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+    }
+    axios
+        .post('/api/mail/sendMail',
+            {
+              recipient: email,
+              order_id: _id,
+              info: order_info
+            }, config)
+        .then((res) => {
 
+        })
+        .catch()
+
+  };
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (
