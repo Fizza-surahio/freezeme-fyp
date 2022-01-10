@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addToCart, removeFromCart } from '../actions/cartActions';
 import MessageBox from '../components/MessageBox';
+import {TiShoppingCart} from "react-icons/ti"
+import {AiTwotoneLock} from "react-icons/ai"
+import {RiDeleteBin5Line} from "react-icons/ri"
 
 export default function CartScreen(props) {
   const productId = props.match.params.id;
@@ -28,7 +31,7 @@ export default function CartScreen(props) {
   return (
     <div className="row top">
       <div className="col-2">
-        <h1>Shopping Cart</h1>
+        <h1><TiShoppingCart/> Shopping Cart</h1>
         {cartItems.length === 0 ? (
           <MessageBox>
             Cart is empty. <Link to="/">Go Shopping</Link>
@@ -61,6 +64,7 @@ export default function CartScreen(props) {
                         <option key={x + 1} value={x + 1}>
                           {x + 1}
                         </option>
+                        
                       ))}
                     </select>
                   </div>
@@ -70,7 +74,7 @@ export default function CartScreen(props) {
                       type="button"
                       onClick={() => removeFromCartHandler(item.product)}
                     >
-                      Delete
+                     <RiDeleteBin5Line/> Delete
                     </button>
                   </div>
                 </div>
@@ -95,7 +99,7 @@ export default function CartScreen(props) {
                 className="primary block"
                 disabled={cartItems.length === 0}
               >
-                Proceed to Checkout
+                 <AiTwotoneLock/> Proceed to Checkout
               </button>
             </li>
           </ul>

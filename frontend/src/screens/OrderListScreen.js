@@ -5,6 +5,16 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import {ORDER_DELETE_RESET} from '../constants/orderConstants';
 import axios from "axios"
+import { ORDER_DELETE_RESET } from '../constants/orderConstants';
+import {MdOutlinePendingActions} from "react-icons/md"
+import {BiEdit} from "react-icons/bi"
+import {CgDetailsMore} from "react-icons/cg"
+import {BiUserCheck} from "react-icons/bi"
+import {BsFillCalendarDateFill} from "react-icons/bs"
+import {BsCashCoin} from "react-icons/bs"
+import {MdOutlineLocalAtm} from "react-icons/md"
+import {GrDeliver} from "react-icons/gr"
+import {FaBoxes} from "react-icons/fa"
 
 export default function OrderListScreen(props) {
     const orderList = useSelector((state) => state.orderList);
@@ -62,7 +72,7 @@ export default function OrderListScreen(props) {
         orders.map((order, index) => (
             order.user ?
                 <tr key={order._id}>
-                    <td>{order._id}</td>
+                    {/* <td>{order._id}</td> */}
                     <td>{order.user.name}</td>
                     <td>{order.createdAt.substring(0, 10)}</td>
                     <td>{order.totalPrice.toFixed(2)}</td>
@@ -87,14 +97,14 @@ export default function OrderListScreen(props) {
                                 props.history.push(`/order/${order._id}`);
                             }}
                         >
-                            Details
+                          <CgDetailsMore/>  Details
                         </button>
                         <button
                             type="button"
                             className="small"
                             onClick={() => deleteHandler(order)}
                         >
-                            Delete
+                           <BiEdit/> Delete
                         </button>
                     </td>
                 </tr>
@@ -104,7 +114,7 @@ export default function OrderListScreen(props) {
 
     return (
         <div>
-            <h1>Orders</h1>
+            <h1><FaBoxes/>Orders</h1>
             {loadingDelete && <LoadingBox></LoadingBox>}
             {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
             {loading ? (
@@ -115,13 +125,13 @@ export default function OrderListScreen(props) {
                 <table className="table">
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>USER</th>
-                        <th>DATE</th>
-                        <th>TOTAL</th>
-                        <th>PAID</th>
-                        <th>DELIVERED</th>
-                        <th>ACTIONS</th>
+                        {/* <th>ID</th> */}
+                        <th><BiUserCheck/>USER</th>
+                        <th><BsFillCalendarDateFill/>DATE</th>
+                        <th><BsCashCoin/>TOTAL</th>
+                        <th><MdOutlineLocalAtm/>PAID</th>
+                        <th><GrDeliver/>DELIVERED</th>
+                        <th>< MdOutlinePendingActions/>ACTIONS</th>
                     </tr>
                     </thead>
                     <tbody>

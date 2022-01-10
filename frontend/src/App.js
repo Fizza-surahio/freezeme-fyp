@@ -21,9 +21,25 @@ import OrderListScreen from './screens/OrderListScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
 import DashboardScreen from './screens/DashboardScreen';
-
+import AboutScreen from './screens/AboutScreen';
+import TeamScreen from './screens/TeamScreen';
 import SupportScreen from './screens/SupportScreen';
 import ChatBox from './components/ChatBox';
+import { FaShoppingCart } from "react-icons/fa";
+import { FaUserAlt } from "react-icons/fa";
+import { FaHistory } from "react-icons/fa";
+import {FaSignOutAlt} from "react-icons/fa";
+import {GoDashboard} from "react-icons/go";
+import { FaCubes } from "react-icons/fa";
+import {FaShoppingBasket } from "react-icons/fa";
+import {FaUsers } from "react-icons/fa";
+import { BsChatRightTextFill } from "react-icons/bs";
+import {FaBuilding} from "react-icons/fa";
+import {RiAdminFill} from "react-icons/ri";
+import {GiTeamIdea} from "react-icons/gi";
+import {FaUserCheck} from "react-icons/fa";
+import {FaSignInAlt} from "react-icons/fa";
+import { GiCubes } from "react-icons/gi";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -40,63 +56,67 @@ function App() {
         <header className="row">
           <div>
             <Link className="brand" to="/">
-              FreezeME
+             <GiCubes/> FreezeME
             </Link>
           </div>
           <div>
-            <Link to="/cart">
-              Cart
+             <Link to="/cart">
+            <FaShoppingCart/> Cart
               {cartItems.length > 0 && (
                 <span className="badge">{cartItems.length}</span>
               )}
             </Link>
             {userInfo ? (
               <div className="dropdown">
-                <Link to="#">
+                <Link to="#"><FaUserCheck/>
                   {userInfo.name} <i className="fa fa-caret-down"></i>{' '}
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/profile">User Profile</Link>
+                    <Link to="/profile"><FaUserAlt/>UserProfile</Link>
                   </li>
                   <li>
-                    <Link to="/orderhistory">Order History</Link>
+                    <Link to="/orderhistory"><FaHistory/>History</Link>
                   </li>
                   <li>
                     <Link to="#signout" onClick={signoutHandler}>
+                      <FaSignOutAlt/>
                       Sign Out
                     </Link>
                   </li>
                 </ul>
               </div>
             ) : (
-              <Link to="/signin">Sign In</Link>
+              <Link to="/signin"><FaSignInAlt/>Sign In</Link>
             )}
             
             {userInfo && userInfo.isAdmin && (
               <div className="dropdown">
-                <Link to="#admin">
+                <Link to="#admin"> <RiAdminFill/>
                   Admin <i className="fa fa-caret-down"></i>
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/dashboard">Dashboard</Link>
+                    <Link to="/dashboard">
+                      <GoDashboard/>Dashboard</Link>
                   </li>
                   <li>
-                    <Link to="/productlist">Products</Link>
+                    <Link to="/productlist"><FaCubes/>Products</Link>
                   </li>
                   <li>
-                    <Link to="/orderlist">Orders</Link>
+                    <Link to="/orderlist"><FaShoppingBasket/>Orders</Link>
                   </li>
                   <li>
-                    <Link to="/userlist">Users</Link>
+                    <Link to="/userlist"><FaUsers/>Users</Link>
                   </li>
                   <li>
-                    <Link to="/support">Support</Link>
+                    <Link to="/support"><BsChatRightTextFill/>Support</Link>
                   </li>
                 </ul>
               </div>
             )}
+             <Link to="/about"> <FaBuilding/> About</Link>
+             <Link to="/team"> <GiTeamIdea/>Team </Link>
               </div>
         </header>
         <main>
@@ -109,6 +129,8 @@ function App() {
           <Route path="/payment" component={PaymentMethodScreen}></Route>
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
           <Route path="/order/:id" component={OrderScreen}></Route>
+          <Route path="/about" component={AboutScreen}></Route>
+          <Route path="/team" component={TeamScreen}></Route>
           <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
           <PrivateRoute path="/profile" component={ProfileScreen}></PrivateRoute>
           

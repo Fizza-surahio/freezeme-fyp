@@ -5,6 +5,7 @@ import MessageBox from '../components/MessageBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions';
 
+
 export default function HomeScreen() {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
@@ -12,8 +13,11 @@ export default function HomeScreen() {
     useEffect(() => {
       dispatch(listProducts());
   }, [dispatch]);
+
+
   return (
-    <div>
+    <div className='background'>
+           
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
@@ -25,6 +29,7 @@ export default function HomeScreen() {
           ))}
         </div>
       )}
+      
     </div>
   );
 }

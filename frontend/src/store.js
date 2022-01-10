@@ -6,7 +6,7 @@ import { orderCreateReducer,
   orderMineListReducer,   orderDeleteReducer,   orderDeliverReducer, orderSummaryReducer,
 } from './reducers/orderReducers';
 import {   productCreateReducer,  productDeleteReducer, productDetailsReducer, productListReducer, productUpdateReducer, } from './reducers/productReducers';
-import {   userAddressMapReducer,userDetailsReducer, userListReducer,   userDeleteReducer,   userUpdateReducer, userRegisterReducer, userSigninReducer,  userUpdateProfileReducer,} from './reducers/userReducers';
+import {   userDetailsReducer, userListReducer,   userDeleteReducer,   userUpdateReducer, userRegisterReducer, userSigninReducer,  userUpdateProfileReducer,} from './reducers/userReducers';
 const initialState = {
   userSignin: {
     userInfo: localStorage.getItem('userInfo')
@@ -44,7 +44,6 @@ const reducer = combineReducers({
   userUpdate: userUpdateReducer,
   userDelete: userDeleteReducer,
   orderSummary: orderSummaryReducer,
-  userAddressMap: userAddressMapReducer,
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
