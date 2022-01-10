@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {deleteOrder, listOrders} from '../actions/orderActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import {ORDER_DELETE_RESET} from '../constants/orderConstants';
 import axios from "axios"
-import { ORDER_DELETE_RESET } from '../constants/orderConstants';
 import {MdOutlinePendingActions} from "react-icons/md"
 import {BiEdit} from "react-icons/bi"
 import {CgDetailsMore} from "react-icons/cg"
@@ -51,7 +50,7 @@ export default function OrderListScreen(props) {
             }
         }
         let date;
-        let paid = true
+        let paid;
         if (is_paid === "Yes"){
             date = (new Date()).toLocaleString('en-US', { timeZone: 'Asia/Karachi' })
             paid = true
