@@ -5,6 +5,14 @@ import { createProduct,   deleteProduct, listProducts } from '../actions/product
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { PRODUCT_CREATE_RESET  ,PRODUCT_DELETE_RESET } from '../constants/productConstants';
+import {GiMeltingIceCube} from "react-icons/gi"
+import {MdCreateNewFolder} from "react-icons/md"
+import {MdOutlineDriveFileRenameOutline} from "react-icons/md"
+import {MdOutlinePriceChange} from "react-icons/md"
+import {BiCategory} from "react-icons/bi"
+import {MdOutlinePendingActions} from "react-icons/md"
+import {RiDeleteBin5Line} from "react-icons/ri"
+import {BiEdit} from "react-icons/bi"
 
 export default function ProductListScreen(props) {
   const productList = useSelector((state) => state.productList);
@@ -49,12 +57,12 @@ export default function ProductListScreen(props) {
   return (
     <div>
        <div className="row">
-        <h1>Products</h1>
+        <h1><GiMeltingIceCube/> Products</h1>
         <button type="button" className="primary" onClick={createHandler}>
-          Create Product
+         <MdCreateNewFolder/> Create Product
         </button>
       </div>
-
+      <div className='style'>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
       {loadingCreate && <LoadingBox></LoadingBox>}
@@ -64,20 +72,21 @@ export default function ProductListScreen(props) {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
+        
         <table className="table">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>NAME</th>
-              <th>PRICE</th>
-              <th>CATEGORY</th>
-              <th>ACTIONS</th>
+              {/* <th>ID</th> */}
+              <th> <MdOutlineDriveFileRenameOutline/> NAME</th>
+              <th><MdOutlinePriceChange/>PRICE</th>
+              <th><BiCategory/>CATEGORY</th>
+              <th><MdOutlinePendingActions/>ACTIONS</th>
             </tr>
           </thead>
           <tbody>
             {products.map((product) => (
               <tr key={product._id}>
-                <td>{product._id}</td>
+                {/* <td>{product._id}</td> */}
                 <td>{product.name}</td>
                 <td>{product.price}</td>
                 <td>{product.category}</td>
@@ -88,7 +97,7 @@ export default function ProductListScreen(props) {
                     onClick={() =>
                       props.history.push(`/product/${product._id}/edit`)
                     }
-                  >
+                  ><BiEdit/>
                     Edit
                   </button>
                   <button
@@ -96,7 +105,7 @@ export default function ProductListScreen(props) {
                     className="small"
                     onClick={() => deleteHandler(product)}
                   >
-                    Delete
+                   <RiDeleteBin5Line/> Delete
                   </button>
                 </td>
               </tr>
@@ -104,6 +113,7 @@ export default function ProductListScreen(props) {
           </tbody>
         </table>
       )}
+      </div>
     </div>
   );
 }

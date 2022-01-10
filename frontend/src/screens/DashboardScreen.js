@@ -4,6 +4,11 @@ import Chart from 'react-google-charts';
 import { summaryOrder } from '../actions/orderActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import {AiFillDashboard} from "react-icons/ai"
+import {FaUsers} from "react-icons/fa"
+import {FaShoppingBasket} from "react-icons/fa"
+import {GiCoins} from "react-icons/gi"
+import {BiCoinStack} from 'react-icons/bi'
 
 export default function DashboardScreen() {
   const orderSummary = useSelector((state) => state.orderSummary);
@@ -15,7 +20,7 @@ export default function DashboardScreen() {
   return (
     <div>
       <div className="row">
-        <h1>Dashboard</h1>
+        <h1><AiFillDashboard/> Dashboard</h1>
       </div>
       {loading ? (
         <LoadingBox />
@@ -26,17 +31,17 @@ export default function DashboardScreen() {
           <ul className="row summary">
             <li>
               <div className="summary-title color1">
-                <span>
-                  <i className="fa fa-users" /> Users
-                </span>
+              <center>  <span>
+                  <i className="fa fa-users" /><FaUsers/> Users
+                </span></center>
               </div>
               <div className="summary-body">{summary.users[0].numUsers}</div>
             </li>
             <li>
               <div className="summary-title color2">
-                <span>
-                  <i className="fa fa-shopping-cart" /> Orders
-                </span>
+              <center> <span>
+                  <i className="fa fa-shopping-cart" /><FaShoppingBasket/> Orders
+                </span></center> 
               </div>
               <div className="summary-body">
                 {summary.orders[0] ? summary.orders[0].numOrders : 0}
@@ -44,9 +49,9 @@ export default function DashboardScreen() {
             </li>
             <li>
               <div className="summary-title color3">
-                <span>
-                  <i className="fa fa-money" /> Sales
-                </span>
+               <center> <span>
+                  <i className="fa fa-money" /><GiCoins/> Sales
+                </span></center>
               </div>
               <div className="summary-body">
                 $
@@ -57,8 +62,8 @@ export default function DashboardScreen() {
             </li>
           </ul>
           <div>
-            <div>
-              <h2>Sales</h2>
+            <div className='sales'>
+              <h2><BiCoinStack/> Sales</h2>
               {summary.dailyOrders.length === 0 ? (
                 <MessageBox>No Sale</MessageBox>
               ) : (

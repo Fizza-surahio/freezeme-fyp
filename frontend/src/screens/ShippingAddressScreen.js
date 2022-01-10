@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveShippingAddress } from '../actions/cartActions';
 import CheckoutSteps from '../components/CheckoutSteps';
+import {ImAddressBook} from "react-icons/im"
+import {BsArrowRightSquare} from "react-icons/bs"
+
+
 
 export default function ShippingAddressScreen(props) {
   const userSignin = useSelector((state) => state.userSignin);
@@ -9,12 +13,7 @@ export default function ShippingAddressScreen(props) {
   const { userInfo } = userSignin;
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
-  const [lat, setLat] = useState(shippingAddress.lat);
-  const [lng, setLng] = useState(shippingAddress.lng);
-  const userAddressMap = useSelector((state) => state.userAddressMap);
-  const { address: addressMap } = userAddressMap;
-
-  
+   
   if (!userInfo) {
     props.history.push('/signin');
   }
@@ -26,53 +25,17 @@ export default function ShippingAddressScreen(props) {
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-       const newLat = addressMap ? addressMap.lat : lat;
-    const newLng = addressMap ? addressMap.lng : lng;
-    if (addressMap) {
-      setLat(addressMap.lat);
-      setLng(addressMap.lng);
-    }
-    let moveOn = true;
-    if (!newLat || !newLng) {
-      moveOn = window.confirm(
-        'You did not set your location on map. Continue?'
-      );
-    }
-    if (moveOn) {
-      dispatch(
-        saveShippingAddress({
-          fullName,
-          address,
-          city,
-          postalCode,
-          country,
-          lat: newLat,
-          lng: newLng,
-        })
-      );
-      props.history.push('/payment');
-    }
-  };
-  const chooseOnMap = () => {
     dispatch(
-      saveShippingAddress({
-        fullName,
-        address,
-        city,
-        postalCode,
-        country,
-        lat,
-        lng,
-      })
+      saveShippingAddress({ fullName, address, city, postalCode, country })
     );
-    props.history.push('/map');
-  };
+    props.history.push('/payment');
+       };
   return (
     <div>
       <CheckoutSteps step1 step2></CheckoutSteps>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1>Shipping Address</h1>
+          <h1><ImAddressBook/> Shipping Address</h1>
         </div>
         <div>
           <label htmlFor="fullName">Full Name</label>
@@ -130,15 +93,9 @@ export default function ShippingAddressScreen(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="chooseOnMap">Location</label>
-          <button type="button" onClick={chooseOnMap}>
-            Choose On Map
-          </button>
-        </div>
-        <div>
           <label />
           <button className="primary" type="submit">
-            Continue
+         <BsArrowRightSquare/>   Continue
           </button>
         </div>
       </form>

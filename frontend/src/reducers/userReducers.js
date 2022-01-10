@@ -1,5 +1,4 @@
 import {
-  USER_ADDRESS_MAP_CONFIRM,
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
@@ -129,11 +128,4 @@ import {
     }
   };
 
-  export const userAddressMapReducer = (state = {}, action) => {
-    switch (action.type) {
-      case USER_ADDRESS_MAP_CONFIRM:
-        return { address: action.payload };
-      default:
-        return state;
-    }
-  };
+ 

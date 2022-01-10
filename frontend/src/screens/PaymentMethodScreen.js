@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { savePaymentMethod } from '../actions/cartActions';
 import CheckoutSteps from '../components/CheckoutSteps';
-
+import {FaWallet} from "react-icons/fa"
+import {BsArrowRightSquare} from "react-icons/bs"
+import {GrDeliver} from "react-icons/gr"
 
 export default function PaymentMethodScreen(props) {
     const cart = useSelector((state) => state.cart);
@@ -23,7 +25,7 @@ export default function PaymentMethodScreen(props) {
           <CheckoutSteps step1 step2 step3></CheckoutSteps>
           <form className="form" onSubmit={submitHandler}>
           <div>
-          <h1>Payment Method</h1>
+          <h1> <FaWallet/> Payment Method</h1>
         </div>
         <div>
           <div>
@@ -36,13 +38,13 @@ export default function PaymentMethodScreen(props) {
               checked
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></input>
-            <label >Cash on Delivery</label>
+            <label >Cash on Delivery  <GrDeliver/> </label>
           </div>
         </div>
             <div>
               <label />
               <button className="primary" type="submit">
-                Continue
+               <BsArrowRightSquare/> Continue 
               </button>
             </div>
           </form>

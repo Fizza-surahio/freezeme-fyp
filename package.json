@@ -16,5 +16,9 @@
     "url": "https://github.com/Fizza-surahio/freezeme-fyp/issues"
   },
   "homepage": "https://github.com/Fizza-surahio/freezeme-fyp#readme",
-  "keywords": []
+  "keywords": [],
+  "dependencies": {
+    "react-slick": "^0.28.1",
+    "slick-carousel": "^1.8.1"
+  }
 }

@@ -6,7 +6,16 @@ import CheckoutSteps from '../components/CheckoutSteps';
 import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-
+import {HiReceiptTax} from "react-icons/hi"
+import {GrDeliver} from "react-icons/gr"
+import {GiStoneBlock} from "react-icons/gi"
+import {FaRegMoneyBillAlt} from "react-icons/fa"
+import {MdSummarize} from "react-icons/md"
+import {FaWallet} from "react-icons/fa"
+import {GiStorkDelivery} from "react-icons/gi"
+import {FaSitemap} from "react-icons/fa"
+import {ImAddressBook} from "react-icons/im"
+import {RiUserSettingsFill } from 'react-icons/ri';
 
 export default function PlaceOrderScreen(props) {
   const cart = useSelector((state) => state.cart);
@@ -43,10 +52,10 @@ export default function PlaceOrderScreen(props) {
           <ul>
             <li>
               <div className="card card-body">
-                <h2>Shipping</h2>
+                <h2><GrDeliver/> Shipping</h2>
                 <p>
-                  <strong>Name:</strong> {cart.shippingAddress.fullName} <br />
-                  <strong>Address: </strong> {cart.shippingAddress.address},
+                  <strong><RiUserSettingsFill/> Name:</strong> {cart.shippingAddress.fullName} <br />
+                  <strong><ImAddressBook/> Address: </strong> {cart.shippingAddress.address},
                   {cart.shippingAddress.city}, {cart.shippingAddress.postalCode}
                   ,{cart.shippingAddress.country}
                 </p>
@@ -54,15 +63,15 @@ export default function PlaceOrderScreen(props) {
             </li>
             <li>
               <div className="card card-body">
-                <h2>Payment</h2>
+                <h2> <FaWallet/> Payment</h2>
                 <p>
-                  <strong>Method:</strong> {cart.paymentMethod}
+                  <strong><GiStorkDelivery/> Method:</strong> {cart.paymentMethod}
                 </p>
               </div>
             </li>
             <li>
               <div className="card card-body">
-                <h2>Order Items</h2>
+                <h2><FaSitemap/> Order Items</h2>
                 <ul>
                   {cart.cartItems.map((item) => (
                     <li key={item.product}>
@@ -95,30 +104,30 @@ export default function PlaceOrderScreen(props) {
           <div className="card card-body">
             <ul>
               <li>
-                <h2>Order Summary</h2>
+                <h2> <MdSummarize/> Order Summary</h2>
               </li>
               <li>
                 <div className="row">
-                  <div>Items</div>
+                  <div><GiStoneBlock/> Items</div>
                   <div>${cart.itemsPrice.toFixed(2)}</div>
                 </div>
               </li>
               <li>
                 <div className="row">
-                  <div>Shipping</div>
+                  <div><GrDeliver/> Shipping</div>
                   <div>${cart.shippingPrice.toFixed(2)}</div>
                 </div>
               </li>
               <li>
                 <div className="row">
-                  <div>Tax</div>
+                  <div><HiReceiptTax/> Tax</div>
                   <div>${cart.taxPrice.toFixed(2)}</div>
                 </div>
               </li>
               <li>
                 <div className="row">
                   <div>
-                    <strong> Order Total</strong>
+                    <strong> <FaRegMoneyBillAlt/> Order Total</strong>
                   </div>
                   <div>
                     <strong>${cart.totalPrice.toFixed(2)}</strong>

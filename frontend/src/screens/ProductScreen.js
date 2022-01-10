@@ -5,6 +5,14 @@ import { Link } from 'react-router-dom';
 import { detailsProduct } from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import {GiReturnArrow} from "react-icons/gi";
+import {BsFillCartCheckFill} from "react-icons/bs"
+import {MdProductionQuantityLimits} from "react-icons/md"
+import {GrStatusUnknown} from "react-icons/gr"
+import {CgUnavailable} from "react-icons/cg"
+import {MdEventAvailable} from "react-icons/md"
+import {ImPriceTag} from "react-icons/im"
+import {MdDescription} from "react-icons/md"
 
 export default function ProductScreen(props) {
   const dispatch = useDispatch();
@@ -29,7 +37,8 @@ export default function ProductScreen(props) {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <div>
-          <Link to="/">Back to result</Link>
+          <Link to="/"><button
+          className="primary "><GiReturnArrow/> Back to result</button></Link>
           <div className="row top">
             <div className="col-2">
               <img
@@ -44,9 +53,8 @@ export default function ProductScreen(props) {
                   <h1>{product.name}</h1>
                 </li>
                
-                <li>Price : ${product.price}</li>
-                <li>
-                  Description:
+                <li> <ImPriceTag/> Price : ${product.price}</li>
+                <li> <MdDescription/> Description:
                   <p>{product.description}</p>
                 </li>
               </ul>
@@ -57,18 +65,18 @@ export default function ProductScreen(props) {
                   
                   <li>
                     <div className="row">
-                      <div>Price</div>
+                      <div><ImPriceTag/> Price</div>
                       <div className="price">${product.price}</div>
                     </div>
                   </li>
                   <li>
                     <div className="row">
-                      <div>Status</div>
+                      <div> <GrStatusUnknown/> Status</div>
                       <div>
                         {product.countInStock > 0 ? (
-                          <span className="success">In Stock</span>
+                          <span className="success"> <MdEventAvailable/> In Stock</span>
                         ) : (
-                          <span className="danger">Unavailable</span>
+                          <span className="danger"> <CgUnavailable/> Unavailable</span>
                         )}
                       </div>
                     </div>
@@ -77,7 +85,7 @@ export default function ProductScreen(props) {
                     <>
                       <li>
                         <div className="row">
-                          <div>Qty</div>
+                          <div><MdProductionQuantityLimits/> Qty</div>
                           <div>
                             <select
                               value={qty}
@@ -99,7 +107,7 @@ export default function ProductScreen(props) {
                           onClick={addToCartHandler}
                           className="primary block"
                         >
-                          Add to Cart
+                          <BsFillCartCheckFill/> Add to Cart
                         </button>
                       </li>
                     </>

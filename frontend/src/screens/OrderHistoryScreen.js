@@ -3,6 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listOrderMine } from '../actions/orderActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import {FaHistory} from "react-icons/fa"
+import {BsFillCalendarDateFill} from "react-icons/bs"
+import {BsCashCoin} from "react-icons/bs"
+import {MdOutlineLocalAtm} from "react-icons/md"
+import {GrDeliver} from "react-icons/gr"
+import {CgDetailsMore} from "react-icons/cg"
+import {MdOutlinePendingActions} from "react-icons/md"
 
 export default function OrderHistoryScreen(props) {
   const orderMineList = useSelector((state) => state.orderMineList);
@@ -13,7 +20,7 @@ export default function OrderHistoryScreen(props) {
   }, [dispatch]);
   return (
     <div>
-      <h1>Order History</h1>
+     <center><h1><FaHistory/> Order History</h1></center> 
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
@@ -22,18 +29,18 @@ export default function OrderHistoryScreen(props) {
         <table className="table">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>DATE</th>
-              <th>TOTAL</th>
-              <th>PAID</th>
-              <th>DELIVERED</th>
-              <th>ACTIONS</th>
+              {/* <th>ID</th> */}
+              <th> <BsFillCalendarDateFill/> DATE</th>
+              <th><BsCashCoin/> TOTAL</th>
+              <th><MdOutlineLocalAtm/> PAID</th>
+              <th><GrDeliver/> DELIVERED</th>
+              <th><MdOutlinePendingActions/> ACTIONS</th>
             </tr>
           </thead>
           <tbody>
             {orders.map((order) => (
               <tr key={order._id}>
-                <td>{order._id}</td>
+                {/* <td>{order._id}</td> */}
                 <td>{order.createdAt.substring(0, 10)}</td>
                 <td>{order.totalPrice.toFixed(2)}</td>
                 <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
@@ -50,7 +57,7 @@ export default function OrderHistoryScreen(props) {
                       props.history.push(`/order/${order._id}`);
                     }}
                   >
-                    Details
+                  <CgDetailsMore/>  Details
                   </button>
                 </td>
               </tr>
